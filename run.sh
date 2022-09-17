@@ -1,4 +1,7 @@
 #!/usr/bin/bash
-php erd.php > dd.dot
-fdp -Tsvg -o dd.svg dd.dot
-eog dd.svg
+FORMAT="${1:-pdf}"
+VIEWER="${2:-browse}"
+SOURCE="${3:-diagram}"
+php erd.php > "$SOURCE.dot"
+dot "-T$FORMAT" -o "$SOURCE.$FORMAT" "$SOURCE.dot"
+$VIEWER "$SOURCE.$FORMAT"
